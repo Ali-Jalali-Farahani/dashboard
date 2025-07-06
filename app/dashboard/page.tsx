@@ -13,7 +13,7 @@ async function dashboard() {
   );
   
   const users=await res.json();
-  const userData = users.data;
+  const usersData = users.data;
 
   return (
     <div className='w-full h-full bg-[#e5eef1] flex'>
@@ -21,7 +21,7 @@ async function dashboard() {
       <div className='w-[80%] h-full grid grid-cols-3 grid-rows-[max-content] gap-[10px] p-[10px]'>
         
         {/* show items */}
-        {userData.map((user:any) => (
+        {usersData.map((user:any) => (
           <ItemBox 
             key={user.id}
             id={user.id}
