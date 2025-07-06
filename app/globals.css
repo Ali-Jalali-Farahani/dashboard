@@ -7,3 +7,12 @@ html,body{
 .LinkStyle{
     @apply w-[70%] h-[60px] bg-blue-500 mb-10 flex justify-center items-center rounded-xl text-white text-4xl;
 }
+
+.containerFlexBothCenter{
+    @apply flex justify-center items-center h-full w-full;
+}
+
+
+/* div{
+    background-color: #e5eef1;
+} */
