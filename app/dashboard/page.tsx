@@ -1,6 +1,9 @@
-import React from 'react'
+
+import React,{useState} from 'react'
 import Link from 'next/link'
 import ItemBox from '@/Components/ItemBox/ItemBox'
+import { IoIosMenu } from "react-icons/io";
+import Menu from '@/Components/Menu/Menu';
 
 async function dashboard() {
   const res =await fetch("https://reqres.in/api/users", {
@@ -15,10 +18,16 @@ async function dashboard() {
   const users=await res.json();
   const usersData = users.data;
 
+  // const [showMenu,setShowMenu]=useState<boolean>(false)
+
   return (
     <div className='w-full h-full bg-[#e5eef1] flex'>
+
+      {/* menu */}
+      <Menu />
+
       {/* items */}
-      <div className='w-[80%] h-full grid grid-cols-3 grid-rows-[max-content] gap-[10px] p-[10px]'>
+      <div className='w-full h-full grid-cols-2 grid grid-rows-[max-content] gap-[10px] p-[10px] mt-[50px] md:w-[80%] md:grid-cols-3 md:mt-[10px]'>
         
         {/* show items */}
         {usersData.map((user:any) => (
@@ -30,23 +39,6 @@ async function dashboard() {
             avatar={user.avatar}
           />
         ))}
-
-      </div>
-
-      {/* menu */}
-      <div className='w-[20%] h-[%100] bg-blue-500 text-right text-white fixed right-[0px] top-[0px] bottom-[0px]'>
-
-        <div className='mt-[10px] pr-[5px]'>
-          <Link href={"/"} >
-            بازگشت به صفحه اصلی
-          </Link>
-        </div>
-
-        <div className='mt-[10px] fixed bottom-[0px] right-[5px] bottom-[15px] text-right'>
-          <Link href={"/login"} >
-            خروج از سیستم
-          </Link>
-        </div>
 
       </div>
       
