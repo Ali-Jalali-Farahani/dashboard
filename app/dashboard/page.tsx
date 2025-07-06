@@ -4,6 +4,7 @@ import Link from 'next/link'
 import ItemBox from '@/Components/ItemBox/ItemBox'
 import { IoIosMenu } from "react-icons/io";
 import Menu from '@/Components/Menu/Menu';
+import ShowItems from '@/Components/ShowItems';
 
 async function dashboard() {
   const res =await fetch("https://reqres.in/api/users", {
@@ -18,8 +19,6 @@ async function dashboard() {
   const users=await res.json();
   const usersData = users.data;
 
-  // const [showMenu,setShowMenu]=useState<boolean>(false)
-
   return (
     <div className='w-full h-full bg-[#e5eef1] flex'>
 
@@ -30,15 +29,7 @@ async function dashboard() {
       <div className='w-full h-full grid-cols-2 grid grid-rows-[max-content] gap-[10px] p-[10px] mt-[50px] md:w-[80%] md:grid-cols-3 md:mt-[10px]'>
         
         {/* show items */}
-        {usersData.map((user:any) => (
-          <ItemBox 
-            key={user.id}
-            id={user.id}
-            firstName={user.first_name}
-            lastName={user.last_name}
-            avatar={user.avatar}
-          />
-        ))}
+        <ShowItems />
 
       </div>
       
