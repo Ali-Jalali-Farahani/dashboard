@@ -31,11 +31,9 @@ function Menu() {
 
               </div>  
                 
-              <div className='mt-[10px] fixed bottom-[0px] right-[5px] bottom-[15px] text-right'>
-                <Link href={"/login"} >
-                  خروج از سیستم
-                </Link>
-              </div>    
+              <button className='mt-[10px] fixed bottom-[0px] right-[5px] bottom-[15px] text-right' onClick={()=>{localStorage.removeItem("token");window.location.href="/login"}}>
+                خروج از سیستم
+              </button>    
             </div>
         </>
     )

@@ -1,19 +1,38 @@
-import React from 'react'
+'use client'
+import React,{useEffect,useState} from 'react'
+import { redirect } from 'next/navigation';
+import { use } from 'react';
 
-async function user({params}:{params:any}) {
 
-   const res =await fetch(`https://reqres.in/api/users/${params.id}`, {
-      method: 'GET', // یا 'POST', 'PUT' و غیره
-      headers: {
-      'x-api-key': 'reqres-free-v1', // اضافه کردن هدر API Key
-      'Content-Type': 'application/json', // (اختیاری) برای درخواست‌های JSON
-      }
-  },
-  );
+function user({params}:{params:any}) {
+  const [userData, setUserData] = useState<any>([]);
+  const { id }:any = use(params);
 
-  const user=await res.json();
-  const userData = user.data;
-  console.log(userData)
+  useEffect(() => {
+    //check token(if not exist or token incorrect redirect to login)
+    const token = localStorage.getItem("token");
+    if (token) {
+      if (token != "QpwL5tke4Pnpja7X4")
+        redirect("/login");
+    }else {
+      redirect("/login");
+    }
+
+    const fetchData = async () => {
+      const res = await fetch(`https://reqres.in/api/users/${id}`, {
+        method: 'GET',
+        headers: {
+          'x-api-key': 'reqres-free-v1',
+          'Content-Type': 'application/json',
+        }
+      });
+      const user = await res.json();
+      setUserData(user.data);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <div className='containerFlexBothCenter flex-col bg-[#e5eef1]'>
