@@ -12,12 +12,12 @@ function Menu() {
     return (
         <>
             {/* navbar in mobile screen */}
-            <div dir='rtl' className='w-[100%] h-[50px] bg-blue-500 text-white text-right fixed top-[0px] left-[0px] right-[0px] md:hidden' onClick={()=>setShowMenu(!showMenu)}>
+            <div dir='rtl' className='w-[100%] h-[50px] bg-[#98acac] text-white text-right fixed top-[0px] left-[0px] right-[0px] md:hidden' onClick={()=>setShowMenu(!showMenu)}>
               <IoIosMenu className='h-[100%] text-[42px]'/>
             </div>  
             
             {/* menu */}
-            <div className={`w-[60%] h-[%100] bg-blue-500 text-right text-white fixed right-[0px] top-[0px] bottom-[0px] ${showMenu?"block":"hidden"} md:w-[20%] md:block`}>    
+            <div className={`w-[60%] h-[%100] bg-[#333356] text-right text-white fixed right-[0px] top-[0px] bottom-[0px] ${showMenu?"block":"hidden"} md:w-[20%] md:block`}>    
 
               <div className='mt-[10px] pr-[5px]'>
 
