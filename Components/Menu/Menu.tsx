@@ -17,7 +17,7 @@ function Menu() {
             </div>  
             
             {/* menu */}
-            <div className={`w-[60%] h-[%100] bg-[#333356] text-right text-white fixed right-[0px] top-[0px] bottom-[0px] ${showMenu?"block":"hidden"} md:w-[20%] md:block`}>    
+            <div className={`w-[40%] h-[%100] bg-[#333356] text-right text-white fixed right-[0px] top-[0px] bottom-[0px] ${showMenu?"block":"hidden"} md:w-[20%] md:block`}>    
 
               <div className='mt-[10px] pr-[5px]'>
 
