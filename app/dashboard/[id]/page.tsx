@@ -2,6 +2,7 @@
 import React,{useEffect,useState} from 'react'
 import { redirect } from 'next/navigation';
 import { use } from 'react';
+import { notFound } from 'next/navigation';
 
 
 function user({params}:{params:any}) {
@@ -19,19 +20,24 @@ function user({params}:{params:any}) {
     }
 
     const fetchData = async () => {
-      const res = await fetch(`https://reqres.in/api/users/${id}`, {
-        method: 'GET',
-        headers: {
-          'x-api-key': 'reqres-free-v1',
-          'Content-Type': 'application/json',
+        const res = await fetch(`https://reqres.in/api/users/${id}`, {
+          method: 'GET',
+          headers: {
+            'x-api-key': 'reqres-free-v1',
+            'Content-Type': 'application/json',
+          }
+        });
+        const user = await res.json();
+        console.log(user)
+        if (!user.data) {
+          console.log("User not found");
+          redirect('/not-found');
         }
-      });
-      const user = await res.json();
-      setUserData(user.data);
-    };
-
+        setUserData(user.data);
+    }
     fetchData();
-  }, []);
+
+  },[])
 
   return (
     <>
