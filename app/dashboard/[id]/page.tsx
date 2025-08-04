@@ -1,43 +1,40 @@
-'use client'
-import React,{useEffect,useState} from 'react'
+import React from 'react'
 import { redirect } from 'next/navigation';
 import { use } from 'react';
 import { notFound } from 'next/navigation';
 
 
 function user({params}:{params:any}) {
-  const [userData, setUserData] = useState<any>([]);
-  const { id }:any = use(params);
 
-  useEffect(() => {
-    //check token(if not exist or token incorrect redirect to login)
-    const token = localStorage.getItem("token");
-    if (token) {
-      if (token != "QpwL5tke4Pnpja7X4")
-        redirect("/login");
-    }else {
-      redirect("/login");
+  const { id }:any= use(params);
+  // const token = localStorage.getItem("token");
+  // if (token) {
+  //   if (token != "QpwL5tke4Pnpja7X4")
+  //     redirect("/login");
+  // }else {
+  //   redirect("/login");
+  // }
+
+
+
+async function getUserData(id: number) {
+    const res = await fetch(`https://reqres.in/api/users/${id}`, {
+      method: 'GET',
+      headers: {
+        'x-api-key': 'reqres-free-v1',
+        'Content-Type': 'application/json'
+      },
+      cache: 'no-store'
+    });
+    const user = await res.json();
+    if (!user.data) {
+      notFound();
     }
+    return user.data;
+  }
 
-    const fetchData = async () => {
-        const res = await fetch(`https://reqres.in/api/users/${id}`, {
-          method: 'GET',
-          headers: {
-            'x-api-key': 'reqres-free-v1',
-            'Content-Type': 'application/json',
-          }
-        });
-        const user = await res.json();
-        console.log(user)
-        if (!user.data) {
-          console.log("User not found");
-          redirect('/not-found');
-        }
-        setUserData(user.data);
-    }
-    fetchData();
+  const userData = use(getUserData(id));
 
-  },[])
 
   return (
     <>
