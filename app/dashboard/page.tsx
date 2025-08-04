@@ -3,44 +3,41 @@ import React,{useEffect,useState} from 'react'
 import ItemBox from '@/Components/ItemBox/ItemBox'
 import Menu from '@/Components/Menu/Menu';
 import { redirect } from 'next/navigation';
+import useSWR from 'swr';
+
+
 
 function dashboard() {
-  const [usersData, setUsersData] = useState<any[]>([]);
-  const [fetchError,setFetchError]=useState<boolean>(false)
-  const [searchText,setSearchText]=useState<string>("")
 
-  useEffect(()=>{
-    //check token(if not exist or token incorrect redirect to login)
-    const token=localStorage.getItem("token");
-    if(token){
-      if(token!="QpwL5tke4Pnpja7X4")
-        redirect("/login");
-    }else{
-      redirect("/login");
-    }
+  type myDatatype ={
+    id: number;
+    first_name: string;
+    last_name: string;
+    avatar: string;
+    email: string;
+  }
 
-    //fetch data of users
-    const fetchData = async () => {
-      try{
-      const res = await fetch("https://reqres.in/api/users", {
-        method: 'GET',
-        headers: {
-          'x-api-key': 'reqres-free-v1',
-          'Content-Type': 'application/json', 
+  const fetchData = async (url:string) => {
+        try{
+        const res = await fetch(url, {
+          method: 'GET',
+          headers: {
+            'x-api-key': 'reqres-free-v1',
+            'Content-Type': 'application/json', 
+          }
+        });
+
+        const users = await res.json();
+        return(users.data);
+        }catch(error){
+          throw new Error("Failed to fetch users data");
         }
-      });
+  };
 
-      const users = await res.json();
-      setUsersData(users.data);
-      }catch(error){
-        setFetchError(true)
-        throw new Error("Failed to fetch users data");
-      }
-    };
+  const fetcher = (...arge:Parameters<typeof fetch>) => fetch(...arge).then(res => res.json())
 
-    fetchData()
-
-  },[])
+  const [searchText,setSearchText]=useState<string>("")
+  const { data:usersData, error:fetchError, isLoading }  = useSWR<myDatatype[]>("https://reqres.in/api/users",fetchData);
 
   return (
     <div className='w-full h-full bg-[#e5eef1] flex'>
@@ -64,7 +61,7 @@ function dashboard() {
             <div className='grid-cols-2 grid grid-rows-[max-content] gap-[10px] p-[10px] pt-0  md:w-[80%] md:grid-cols-3'>
 
               {/* filter items and show(map) */}
-              {usersData.filter((user:any)=>{
+              {usersData?.filter((user:any)=>{
                 let name=`${user.first_name} ${user.last_name}`;
                 if(searchText){
                   return name.includes(searchText)

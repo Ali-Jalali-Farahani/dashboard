@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+.Active h1{
+    @apply text-red-500;
+}
+
 html,body{
     height: 100vh;
 }
