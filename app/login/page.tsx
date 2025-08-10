@@ -1,10 +1,11 @@
 'use client';
-import React,{useState,useEffect} from 'react'
+import React,{useState} from 'react'
 import Input from '@/Components/LoginPage/Input'
 import ContainerBox from '@/Components/LoginPage/ContainerBox'
 import { AuthContext } from '@/Context/AuthContext';
-import { redirect } from 'next/navigation';
 import { useRouter } from 'next/navigation';
+import getToken from '@/Utilities/getToken'
+import { use } from 'react';
 
 function login() {
   const router = useRouter();
@@ -13,12 +14,12 @@ function login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // Check if user is already logged in redirecting to dashboard
-  useEffect(() => {
-    if(localStorage.getItem("token")=="QpwL5tke4Pnpja7X4"){
-      redirect("/dashboard");
-    }
-  },[])
+  const token=getToken()
+
+  // if(token=="QpwL5tke4Pnpja7X4"){
+  //   router.push("/dashboard")
+  // }
+
 
   // Handle login function
   const handleLogin = async (event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -44,7 +45,7 @@ function login() {
       }
 
       const data = await response.json();
-      localStorage.setItem("token",data.token);
+      cookieStore.set("token",data.token);
       router.push('/dashboard');
 
     } catch (error) {

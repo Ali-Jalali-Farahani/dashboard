@@ -2,20 +2,25 @@ import React from 'react'
 import { redirect } from 'next/navigation';
 import { use } from 'react';
 import { notFound } from 'next/navigation';
+import { cookies } from 'next/headers';
 
-
-function user({params}:{params:any}) {
+async function user({params}:{params:any}) {
 
   const { id }:any= use(params);
-  // const token = localStorage.getItem("token");
-  // if (token) {
-  //   if (token != "QpwL5tke4Pnpja7X4")
-  //     redirect("/login");
-  // }else {
-  //   redirect("/login");
-  // }
 
+  const cookieStore=await cookies()
+  const token=String(cookieStore.get("token"))
 
+  if(token=="QpwL5tke4Pnpja7X4"){
+    redirect("/dashboard");
+  }
+
+  if (token) {
+  if (token != "QpwL5tke4Pnpja7X4")
+      redirect("/login");
+  }else {
+    redirect("/login");
+  }
 
   async function getUserData(id: number) {
       const res = await fetch(`https://reqres.in/api/users/${id}`, {
@@ -34,7 +39,6 @@ function user({params}:{params:any}) {
   }
 
   const userData = use(getUserData(id));
-
 
   return (
     <>
