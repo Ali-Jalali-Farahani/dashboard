@@ -1,26 +1,24 @@
 "use client"
-import React,{useEffect} from 'react'
+import React from 'react'
 import Input from '@/Components/LoginPage/Input'
 import ContainerBox from '@/Components/LoginPage/ContainerBox'
 import { useRouter } from 'next/navigation';
 import { useSelector,useDispatch} from 'react-redux';
 import {setUserName,setPassword,setErrorMessage} from "@/store/slices/loginParams"
+import {addTokenToCookies} from "./page"
+
 
 function ClientComponent() {
     const {userName,password,errorMessage}=useSelector((state:{userName:string,password:string,errorMessage:string})=>state)
     const dispatch=useDispatch()
     const router = useRouter();
 
-      
-    // Check if user is already logged in redirecting to dashboard
-    useEffect(()=>{
-      if(localStorage.getItem("token")=="QpwL5tke4Pnpja7X4"){
-        router.push("/dashboard");
-      }
-    
-    },[])
+    // function x(token:string){
+    //   console.log(token)
+    //   addTokenToCookies(token)
+    // }
 
-      // Handle login function
+    // Handle login function
     const handleLogin = async (event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.preventDefault();
       if (userName === "" || password === "") {
@@ -44,6 +42,7 @@ function ClientComponent() {
         }
 
         const data = await response.json();
+        addTokenToCookies(data.token)
         router.push('/dashboard');
 
       } catch (error) {
