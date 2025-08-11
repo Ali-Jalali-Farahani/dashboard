@@ -17,20 +17,20 @@ function user({params}:{params:any}) {
 
 
 
-async function getUserData(id: number) {
-    const res = await fetch(`https://reqres.in/api/users/${id}`, {
-      method: 'GET',
-      headers: {
-        'x-api-key': 'reqres-free-v1',
-        'Content-Type': 'application/json'
-      },
-      cache: 'no-store'
-    });
-    const user = await res.json();
-    if (!user.data) {
-      notFound();
-    }
-    return user.data;
+  async function getUserData(id: number) {
+      const res = await fetch(`https://reqres.in/api/users/${id}`, {
+        method: 'GET',
+        headers: {
+          'x-api-key': 'reqres-free-v1',
+          'Content-Type': 'application/json'
+        },
+        cache: 'no-store'
+      });
+      const user = await res.json();
+      if (!user.data) {
+        notFound();
+      }
+      return user.data;
   }
 
   const userData = use(getUserData(id));
