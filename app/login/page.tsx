@@ -46,7 +46,7 @@ function login() {
       }
 
       const data = await response.json();
-      localStorage.setItem("token",data.token);
+      cookieStore.set("token",data.token);
       router.push('/dashboard');
 
     } catch (error) {
