@@ -46,7 +46,6 @@ function login() {
       }
 
       const data = await response.json();
-      cookieStore.set("token",data.token);
       router.push('/dashboard');
 
     } catch (error) {
