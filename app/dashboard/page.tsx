@@ -35,12 +35,7 @@ function dashboard() {
   const fetcher = (...arge:Parameters<typeof fetch>) => fetch(...arge).then(res => res.json())
 
   const [searchText,setSearchText]=useState<string>("")
-<<<<<<< HEAD
-  const { data:usersData, error:fetchError, isLoading }  = useSWR<myDatatype[]>("https://reqres.in/api/users",fetchData,{keepPreviousData : false});
-
-=======
   const { data:usersData, error:fetchError}  = useSWR<myDatatype[]>("https://reqres.in/api/users",fetchData,{ revalidateIfStale: false,});
->>>>>>> f54ad7991d2fcd1f6a4f51a5430abb45855e5c91
   return (
     <div className='w-full h-full bg-[#e5eef1] flex'>
 
