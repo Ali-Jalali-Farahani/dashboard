@@ -15,16 +15,17 @@ function dashboard() {
     email: string;
   }
 
-  const fetchData = async (url:string) => {
+  const fetchUsers=(id:number)=>async (url:string) => {
         try{
-        const res = await fetch(url, {
+          console.log(id)
+          const res = await fetch(url, {
           method: 'GET',
           headers: {
             'x-api-key': 'reqres-free-v1',
             'Content-Type': 'application/json', 
           }
         });
-
+        
         const users = await res.json();
         return(users.data);
         }catch(error){
@@ -32,10 +33,10 @@ function dashboard() {
         }
   };
 
-  const fetcher = (...arge:Parameters<typeof fetch>) => fetch(...arge).then(res => res.json())
 
+  const { data:usersData, error:fetchError}  = useSWR("https://reqres.in/api/users",fetchUsers,{revalidateIfStale: false});
   const [searchText,setSearchText]=useState<string>("")
-  const { data:usersData, error:fetchError}  = useSWR<myDatatype[]>("https://reqres.in/api/users",fetchData,{ revalidateIfStale: false,});
+
   return (
     <div className='w-full h-full bg-[#e5eef1] flex'>
 

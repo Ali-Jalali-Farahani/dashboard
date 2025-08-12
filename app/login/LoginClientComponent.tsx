@@ -13,10 +13,6 @@ function ClientComponent() {
     const dispatch=useDispatch()
     const router = useRouter();
 
-    // function x(token:string){
-    //   console.log(token)
-    //   addTokenToCookies(token)
-    // }
 
     // Handle login function
     const handleLogin = async (event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -42,7 +38,7 @@ function ClientComponent() {
         }
 
         const data = await response.json();
-        addTokenToCookies(data.token)
+        addTokenToCookies(data.token);
         router.push('/dashboard');
 
       } catch (error) {

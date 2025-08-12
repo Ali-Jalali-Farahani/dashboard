@@ -11,14 +11,14 @@ export async function addTokenToCookies(token:string){
 }
 
 async function login() {
-  const cookieStore=await cookies()
+  // const cookieStore=await cookies()
 
   //check token is available
-  if(cookieStore.has("token")){
-    if(cookieStore.get("token")?.value=="QpwL5tke4Pnpja7X4"){
-      redirect("/dashboard")
-    }
-  }
+  // if(cookieStore.has("token")){
+  //   if(cookieStore.get("token")?.value=="QpwL5tke4Pnpja7X4"){
+  //     redirect("/dashboard")
+  //   }
+  // }
 
   return (
     <div className='containerFlexBothCenter flex-col bg-[#9cdcf1]'>

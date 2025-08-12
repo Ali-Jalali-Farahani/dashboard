@@ -27,7 +27,7 @@ export default function Layout({ children }: LayoutProps) {
     () => import('swr').then((mod) => mod.SWRConfig),
     { ssr: false }
   );
-  console.log(localStorageProvider())
+
   return (
     <SWRConfigDynamic value={{ provider: localStorageProvider }}>
       {children}
