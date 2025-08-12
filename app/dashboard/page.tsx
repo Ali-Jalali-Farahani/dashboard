@@ -15,9 +15,8 @@ function dashboard() {
     email: string;
   }
 
-  const fetchUsers=(id:number)=>async (url:string) => {
+  const fetchUsers=async (url:string) => {
         try{
-          console.log(id)
           const res = await fetch(url, {
           method: 'GET',
           headers: {
@@ -34,7 +33,7 @@ function dashboard() {
   };
 
 
-  const { data:usersData, error:fetchError}  = useSWR("https://reqres.in/api/users",fetchUsers,{revalidateIfStale: false});
+  const { data:usersData, error:fetchError} = useSWR<myDatatype[]>("https://reqres.in/api/users",fetchUsers,{revalidateIfStale: false});
   const [searchText,setSearchText]=useState<string>("")
 
   return (
