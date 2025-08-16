@@ -22,7 +22,7 @@ function login() {
        return;
      }
      try {
-       const {data}=useSWR('https://dummyjson.com/auth/login',fetcher({username: userName, password:password}))
+       const {data}=await useSWR('https://dummyjson.com/auth/login',fetcher({username: userName, password:password}))
        addTokenToCookies(data.token);
        console.log(data)
        router.push('/dashboard');
