@@ -20,10 +20,10 @@ interface User {
       credentials: 'include' // Include cookies (e.g., accessToken) in the request
 
     });
-    if (!response.ok) {
-      console.log("error")
-      return null;
-    }
+    // if (!response.ok) {
+    //   console.log("error")
+    //   return null;
+    // }
 
     const responseData = await response.json();
     console.log(responseData)
