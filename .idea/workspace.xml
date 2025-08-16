@@ -6,6 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="fbbfc7d5-fab7-4fad-b3a7-2957f6997ae6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Components/LoginPage/Input.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Components/LoginPage/Input.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/login/loginCheck.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/login/loginCheck.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/login/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/slices/loginParams.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/store.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +20,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Ali-Jalali-Farahani&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>

@@ -1,48 +1,48 @@
 "use client"
-import React from 'react'
+import React, {use, useState} from 'react'
+
 import Input from '@/Components/LoginPage/Input'
 import ContainerBox from '@/Components/LoginPage/ContainerBox'
 import { useRouter } from 'next/navigation';
-import { useSelector,useDispatch} from 'react-redux';
-import {setUserName,setPassword,setErrorMessage} from "@/store/slices/loginParams"
-import useSWR from 'swr';
 import fetcher from "./loginCheck.service"
 import addTokenToCookies from './addTokenToCookies';
+import  {User} from "./loginCheck.service"
 
 function login() {
 
-  const {userName,password,errorMessage}=useSelector((state:{userName:string,password:string,errorMessage:string})=>state)
-   const dispatch=useDispatch()
-   const router = useRouter();
-   // Handle login function
-   const handleLogin = async (event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-     event.preventDefault();
-     if (userName === "" || password === "") {
-       dispatch(setErrorMessage("لطفا نام کاربری و رمز عبور را وارد کنید"))
-       return;
-     }
-     try {
-       const {data}=await useSWR('https://dummyjson.com/auth/login',fetcher({username: userName, password:password}))
-       addTokenToCookies(data.token);
-       console.log(data)
-       router.push('/dashboard');
-     } catch (error) {
-       dispatch(setErrorMessage("خطا در ورود به سیستم"))
-     }
-   }
+    const [username,setUsername]=useState('')
+    const [password,setPassword]=useState('')
+    const [error,setError]=useState('')
+    const router = useRouter();
 
-  return (
-    <div className='containerFlexBothCenter flex-col bg-[#9cdcf1]'>
-      <ContainerBox>
-        <p className='text-center mb-[20px]'>ورود به حساب کاربری</p>
-        <Input Name={"username"} value={userName} updateValue={setUserName}/>
-        <Input Name={"password"} value={password} updateValue={setPassword}/>
-        <p className={`text-center text-red-500 mb-[18px] ${errorMessage==""?"hidden":"block"}`}>{errorMessage}</p>
-        <button type="submit" className='bg-green-600 text-white block mx-auto px-[18px] py-[10px] rounded-md cursor-pointer' onClick={handleLogin}>ورود</button>
-      </ContainerBox>
-    </div>
-  )
+   // Handle login function
+    const handleLogin =(event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        event.preventDefault();
+        if (username === "" || password === "") {
+            setError("لطفا نام کاربری و رمز عبور را وارد کنید")
+            return;
+        }
+
+        const data: User | null = use(fetcher('https://dummyjson.com/auth/login', {username: username, password: password}))
+        if (data) {
+            addTokenToCookies(data.accessToken);
+            router.push('/dashboard');
+        } else {
+            setError("خطا در ورود به سیستم")
+        }
+    }
+
+    return (
+      <div className='containerFlexBothCenter flex-col bg-[#9cdcf1]'>
+        <ContainerBox>
+          <p className='text-center mb-[20px]'>ورود به حساب کاربری</p>
+          <Input Name={"username"} value={username} updateValue={setUsername}/>
+          <Input Name={"password"} value={password} updateValue={setPassword}/>
+          <p className={`text-center text-red-500 mb-[18px] ${error==""?"hidden":"block"}`}>{error}</p>
+          <button type="submit" className='bg-green-600 text-white block mx-auto px-[18px] py-[10px] rounded-md cursor-pointer' onClick={handleLogin}>ورود</button>
+        </ContainerBox>
+      </div>
+    )
 }
 
-export default login
-
+export default login;

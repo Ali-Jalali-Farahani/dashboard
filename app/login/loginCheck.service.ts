@@ -1,4 +1,4 @@
-interface User {
+export interface User {
   id: number;
   username: string;
   email: string;
@@ -10,7 +10,7 @@ interface User {
   refreshToken: string; // JWT refresh token
 }
 
- const fetcher=(data:{username: string, password:string})=>async(url:string)=>{
+ const fetcher=async (url:string,data:{username: string, password:string})=>{
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -20,13 +20,12 @@ interface User {
       credentials: 'include' // Include cookies (e.g., accessToken) in the request
 
     });
-    // if (!response.ok) {
-    //   console.log("error")
-    //   return null;
-    // }
+    if (!response.ok) {
+      console.log("error")
+      return null;
+    }
 
-    const responseData = await response.json();
-    console.log(responseData)
+    const responseData:User = await response.json();
     return responseData
  }
 
