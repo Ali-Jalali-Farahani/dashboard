@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="fbbfc7d5-fab7-4fad-b3a7-2957f6997ae6" name="Changes" comment="change code - need to work on it">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/login/loginCheck.service.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/login/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/login/page.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +23,12 @@
     &quot;assignee&quot;: &quot;Ali-Jalali-Farahani&quot;
   }
 }</component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Ali-Jalali-Farahani/dashboard.git",
+    "accountId": "a3178255-d197-429d-b383-b9e566c8dd74"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
 }</component>
@@ -38,13 +46,15 @@
     "git-widget-placeholder": "main",
     "js.debugger.nextJs.config.created.client": "true",
     "js.debugger.nextJs.config.created.server": "true",
+    "junie.onboarding.icon.badge.shown": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "ts.external.directory.path": "C:\\Works\\Project\\dashboard\\node_modules\\typescript\\lib",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "C:\\Works\\Works\\Projects\\dashboard\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -82,6 +92,7 @@
       <workItem from="1755078811250" duration="131000" />
       <workItem from="1755331152950" duration="1529000" />
       <workItem from="1755352662347" duration="460000" />
+      <workItem from="1755402875298" duration="1498000" />
     </task>
     <task id="LOCAL-00001" summary="change code - need to work on it">
       <option name="closed" value="true" />

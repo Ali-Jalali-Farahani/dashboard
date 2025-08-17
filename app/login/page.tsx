@@ -4,9 +4,8 @@ import React, {use, useState} from 'react'
 import Input from '@/Components/LoginPage/Input'
 import ContainerBox from '@/Components/LoginPage/ContainerBox'
 import { useRouter } from 'next/navigation';
-import fetcher from "./loginCheck.service"
 import addTokenToCookies from './addTokenToCookies';
-import  {User} from "./loginCheck.service"
+
 
 function login() {
 
@@ -16,20 +15,37 @@ function login() {
     const router = useRouter();
 
    // Handle login function
-    const handleLogin =(event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleLogin =async (event:React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         if (username === "" || password === "") {
             setError("لطفا نام کاربری و رمز عبور را وارد کنید")
-            return;
         }
 
-        const data: User | null = use(fetcher('https://dummyjson.com/auth/login', {username: username, password: password}))
-        if (data) {
-            addTokenToCookies(data.accessToken);
-            router.push('/dashboard');
-        } else {
+        try {
+            const response = await fetch("https://dummyjson.com/auth/login", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({username: 'emilys', password: 'emilyspass',expiresInMins:30}),
+                credentials: 'include'
+            });
+
+            if (!response.ok) {
+                setError("خطا در ورود به سیستم")
+            }
+
+            const data=await response.json();
+            if (data) {
+                addTokenToCookies(data.accessToken);
+                router.push('/dashboard');
+            } else {
+                setError("خطا در ورود به سیستم")
+            }
+        } catch (error) {
             setError("خطا در ورود به سیستم")
         }
+
     }
 
     return (
