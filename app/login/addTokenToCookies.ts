@@ -4,5 +4,5 @@ import { cookies } from 'next/headers';
 
 export default async function addTokenToCookies(token:string){
   const cookieStore=await cookies()
-  cookieStore.set("token",token)
+  cookieStore.set("accessToken",token)
 }

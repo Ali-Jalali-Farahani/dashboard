@@ -6,7 +6,6 @@ import ContainerBox from '@/Components/LoginPage/ContainerBox'
 import { useRouter } from 'next/navigation';
 import addTokenToCookies from './addTokenToCookies';
 
-
 function login() {
 
     const [username,setUsername]=useState('')
@@ -19,6 +18,7 @@ function login() {
         event.preventDefault();
         if (username === "" || password === "") {
             setError("لطفا نام کاربری و رمز عبور را وارد کنید")
+            return;
         }
 
         try {
@@ -27,8 +27,9 @@ function login() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({username: 'emilys', password: 'emilyspass',expiresInMins:30}),
-                credentials: 'include'
+                // body: JSON.stringify({username: 'emilys', password: 'emilyspass'}),
+                body: JSON.stringify({username: username, password: password}),
+                // credentials: 'include'
             });
 
             if (!response.ok) {
@@ -36,8 +37,8 @@ function login() {
             }
 
             const data=await response.json();
-            if (data) {
-                addTokenToCookies(data.accessToken);
+            if (data.message!='Invalid credentials') {
+                await addTokenToCookies(data.accessToken);
                 router.push('/dashboard');
             } else {
                 setError("خطا در ورود به سیستم")
